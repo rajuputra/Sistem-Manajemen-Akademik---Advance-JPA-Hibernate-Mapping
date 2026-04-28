@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout}">
+<th:block th:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                    <h4 class="fw-bold mb-0 text-dark">Tambah Student Baru</h4>
+                    <a th:href="@{/students}" class="btn-close" aria-label="Close"></a>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/students/save}" method="post" th:object="${student}">
+
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-muted">First Name</label>
+                                <input type="text" class="form-control bg-light" th:field="*{firstName}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold text-muted">Last Name</label>
+                                <input type="text" class="form-control bg-light" th:field="*{lastName}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted">Email</label>
+                            <input type="email" class="form-control bg-light" th:field="*{email}" required>
+                        </div>
+
+                        <hr class="my-4 text-muted">
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted">Assign Courses <span class="badge bg-secondary fw-normal">Opsional</span></label>
+                            <select class="form-select bg-light" name="courseIds" multiple size="5">
+                                <option th:each="course : ${allCourses}"
+                                        th:value="${course.id}"
+                                        th:text="${course.title}">Course</option>
+                            </select>
+                            <div class="form-text"><i class="bi bi-info-circle"></i> Gunakan Ctrl (Windows) atau Cmd (Mac) untuk memilih lebih dari satu kursus.</div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                            <a th:href="@{/students}" class="btn btn-light px-4">Batal</a>
+                            <button type="submit" class="btn btn-primary px-4"><i class="bi bi-save"></i> Simpan Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

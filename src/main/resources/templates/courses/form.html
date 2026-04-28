@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout}">
+<th:block th:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                    <h4 class="fw-bold mb-0 text-dark">Tambah Course Baru</h4>
+                    <a th:href="@{/courses}" class="btn-close" aria-label="Close"></a>
+                </div>
+                <div class="card-body p-4">
+                    <form th:action="@{/courses/save}" method="post" th:object="${course}">
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted">Judul Course</label>
+                            <input type="text" class="form-control form-control-lg bg-light" th:field="*{title}" placeholder="Masukkan judul course..." required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted">Pilih Instructor</label>
+                            <select class="form-select form-select-lg bg-light" name="instructorId" required>
+                                <option value="">-- Pilih Instructor --</option>
+                                <option th:each="inst : ${instructors}"
+                                        th:value="${inst.id}"
+                                        th:text="${inst.firstName + ' ' + inst.lastName}">Instructor</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted">Assign Students <span class="badge bg-secondary fw-normal">Opsional</span></label>
+                            <select class="form-select bg-light" name="studentIds" multiple size="5">
+                                <option th:each="s : ${allStudents}"
+                                        th:value="${s.id}"
+                                        th:text="${s.firstName + ' ' + s.lastName}">Student</option>
+                            </select>
+                            <div class="form-text"><i class="bi bi-info-circle"></i> Tahan tombol Ctrl (Windows) atau Cmd (Mac) untuk memilih lebih dari satu siswa.</div>
+                        </div>
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
+                            <a th:href="@{/courses}" class="btn btn-light px-4">Batal</a>
+                            <button type="submit" class="btn btn-primary px-4"><i class="bi bi-save"></i> Simpan Data</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

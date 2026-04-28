@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout}">
+<th:block th:fragment="content">
+
+  <div class="mb-4 d-flex align-items-center gap-3">
+    <a th:href="@{/courses}" class="btn btn-light text-secondary rounded-circle p-2 lh-1"><i class="bi bi-arrow-left"></i></a>
+    <h2 class="fw-bold mb-0 text-dark" th:text="${course.title}">Judul Course</h2>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-4">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h6 class="text-uppercase text-muted fw-bold mb-3"><i class="bi bi-person-badge"></i> Info Instructor</h6>
+          <div class="d-flex align-items-center">
+            <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px;">
+              <i class="bi bi-person fs-4"></i>
+            </div>
+            <div>
+              <h5 class="mb-0 fw-bold" th:text="${course.instructor?.firstName + ' ' + course.instructor?.lastName}">-</h5>
+              <small class="text-muted">Instructor Utama</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm border-success border-top border-3">
+        <div class="card-body">
+          <h6 class="fw-bold text-success mb-3">Tambah Student ke Course</h6>
+          <form th:action="@{/courses/{id}/assign-student(id=${course.id})}" method="post">
+            <select name="studentId" class="form-select bg-light mb-3" required>
+              <option value="">-- Pilih Student --</option>
+              <option th:each="s : ${allStudents}" th:value="${s.id}" th:text="${s.firstName + ' ' + s.lastName}">Nama</option>
+            </select>
+            <button class="btn btn-success w-100"><i class="bi bi-plus-circle"></i> Assign Student</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-8">
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+          <h6 class="fw-bold mb-0"><i class="bi bi-people"></i> Students Terdaftar</h6>
+          <span class="badge bg-primary rounded-pill" th:text="${#lists.size(course.students)}">0</span>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush" th:if="${not #lists.isEmpty(course.students)}">
+            <li class="list-group-item px-4 py-3 d-flex align-items-center gap-3" th:each="student : ${course.students}">
+              <i class="bi bi-person-check text-success"></i>
+              <span th:text="${student.firstName + ' ' + student.lastName}">Student</span>
+            </li>
+          </ul>
+          <div class="p-4 text-center text-muted" th:if="${#lists.isEmpty(course.students)}">
+            <i class="bi bi-inbox fs-1 d-block mb-2 text-light"></i> Belum ada student yang terdaftar.
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-white py-3">
+          <h6 class="fw-bold mb-0"><i class="bi bi-chat-dots"></i> Reviews</h6>
+        </div>
+        <div class="card-body bg-light">
+          <form th:action="@{/courses/{id}/reviews(id=${course.id})}" method="post" class="mb-4">
+            <div class="input-group shadow-sm">
+              <input type="text" name="comment" class="form-control border-0" placeholder="Tulis review tentang course ini..." required>
+              <button class="btn btn-primary px-4">Kirim</button>
+            </div>
+          </form>
+
+          <div th:if="${not #lists.isEmpty(course.reviews)}">
+            <div class="card border-0 shadow-sm mb-2" th:each="review : ${course.reviews}">
+              <div class="card-body py-2 px-3">
+                <i class="bi bi-chat-quote text-muted me-2"></i>
+                <span th:text="${review.comment}">Comment</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center text-muted py-3" th:if="${#lists.isEmpty(course.reviews)}">
+            Belum ada review untuk course ini.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</th:block>
+</html>

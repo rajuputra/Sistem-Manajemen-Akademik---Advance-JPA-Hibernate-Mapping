@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout}">
+<th:block th:fragment="content">
+
+    <div class="mb-4 d-flex align-items-center gap-3">
+        <a th:href="@{/instructors}" class="btn btn-light text-secondary rounded-circle p-2 lh-1"><i class="bi bi-arrow-left"></i></a>
+        <h2 class="fw-bold mb-0 text-dark">Detail Instructor</h2>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body text-center p-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 80px; height: 80px;">
+                        <i class="bi bi-person-video3 display-5"></i>
+                    </div>
+                    <h4 class="fw-bold mb-1" th:text="${instructor.firstName + ' ' + instructor.lastName}">Nama Lengkap</h4>
+                    <p class="text-muted mb-4" th:text="${instructor.email}">email@domain.com</p>
+
+                    <div th:if="${instructor.instructorDetail != null}" class="text-start bg-light p-3 rounded-3">
+                        <div class="mb-2">
+                            <small class="text-muted d-block fw-bold">YouTube Channel</small>
+                            <span class="text-danger"><i class="bi bi-youtube me-1"></i> <span th:text="${instructor.instructorDetail.youtubeChannel}">channel</span></span>
+                        </div>
+                        <div>
+                            <small class="text-muted d-block fw-bold">Hobi</small>
+                            <span class="text-dark"><i class="bi bi-star me-1"></i> <span th:text="${instructor.instructorDetail.hobby}">hobby</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+                    <h6 class="fw-bold mb-0"><i class="bi bi-book"></i> Courses yang Diajar</h6>
+                    <span class="badge bg-success rounded-pill" th:text="${#lists.size(instructor.courses)}">0</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(instructor.courses)}">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">ID</th>
+                                <th>Judul Course</th>
+                                <th class="text-end pe-4">Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="course : ${instructor.courses}">
+                                <td class="ps-4 fw-medium text-muted" th:text="${course.id}">10</td>
+                                <td class="fw-bold" th:text="${course.title}">Judul</td>
+                                <td class="text-end pe-4">
+                                    <a th:href="@{/courses/{id}(id=${course.id})}" class="btn btn-sm btn-light text-primary"><i class="bi bi-eye"></i> Lihat</a>
+                                    <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="post" style="display:inline" onsubmit="return confirmDelete('Hapus course ini?')">
+                                        <button class="btn btn-sm btn-light text-danger"><i class="bi bi-trash"></i> Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="p-5 text-center text-muted" th:if="${#lists.isEmpty(instructor.courses)}">
+                        <i class="bi bi-journal-x fs-1 d-block mb-2 text-light"></i> Instructor ini belum mengajar course apapun.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</th:block>
+</html>

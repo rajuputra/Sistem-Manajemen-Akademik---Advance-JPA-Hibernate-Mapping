@@ -1,0 +1,80 @@
+package com.belajar.cruddemo.dao;
+
+import com.belajar.cruddemo.entity.Course;
+import com.belajar.cruddemo.entity.Instructor;
+import com.belajar.cruddemo.entity.InstructorDetail;
+import com.belajar.cruddemo.entity.Student;
+
+import java.util.List;
+
+
+public interface AppDAO {
+
+    void save(Instructor instructor);
+
+    Instructor findInstructorById(int theId);
+
+    void deleteInstructorById(int theId);
+
+    InstructorDetail findInstructorDetailById(int theId);
+
+    void deleteInstructorDetailById(int theId);
+
+    List<Course> findCoursesByInstructorId(int theId);
+
+    Instructor findInstructorByIdJoinFetch(int theId);
+
+    void Update(Instructor tempInstructor);
+
+    void Update(Course tempCourse);
+
+    Course findCourseById(int theId);
+
+    void deleteCourseById(int theId);
+
+    void save(Course theCourse);
+
+    Course findCourseAndReviewsByCourseId(int theId);
+
+    Course findCourseAndStudentByCourseId(int theId);
+
+    Student findStudentAndCoursesByStudentId(int theId);
+
+    void update(Student tempStudent);
+
+    void deleteStudentById(int theId);
+
+    List<Instructor> findAllInstructors();
+
+    List<Course> findAllCourses();
+
+    List<Student> findAllStudents();
+
+    void save(Student theStudent);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
