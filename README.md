@@ -14,7 +14,7 @@ EduManage adalah aplikasi web Sistem Manajemen Akademik sederhana yang dibangun 
 - **Backend:** Java 17+, Spring Boot 3, Spring Data JPA
 - **Database Mapping:** Hibernate
 - **Frontend:** HTML5, Thymeleaf, Bootstrap 5, Bootstrap Icons
-- **Database:** [Isi dengan database yang kamu gunakan, misal: MySQL / PostgreSQL / H2 In-Memory Database]
+- **Database:** MySQL
 - **Build Tool:** Maven
 
 ## 📋 Konsep Relasi Database (JPA Mapping)
