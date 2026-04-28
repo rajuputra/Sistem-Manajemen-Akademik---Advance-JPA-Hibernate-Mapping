@@ -37,12 +37,13 @@ Project ini mengimplementasikan berbagai jenis relasi entitas:
 4. **Konfigurasi Database:**
 Buka file src/main/resources/application.properties dan sesuaikan kredensial database kamu. Contoh untuk MySQL:
 Set Properties
-spring.datasource.url=jdbc:mysql://localhost:3306/[nama_database]?useSSL=false&serverTimezone=UTC
-spring.datasource.username=[username_kamu]
-spring.datasource.password=[password_kamu]
-
-5. **Jalankan Aplikasi:**
+   ```bash
+   spring.datasource.url=jdbc:mysql://localhost:3306/[nama_database]?useSSL=false&serverTimezone=UTC
+   spring.datasource.username=[username_kamu]
+   spring.datasource.password=[password_kamu]
+   ```
+6. **Jalankan Aplikasi:**
 Jalankan class utama CruddemoApplication.java.
 
-6. **Akses via Browser:**
+7. **Akses via Browser:**
 Buka http://localhost:8080 di browser Anda.
