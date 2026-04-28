@@ -47,3 +47,8 @@ Jalankan class utama CruddemoApplication.java.
 
 7. **Akses via Browser:**
 Buka http://localhost:8080 di browser Anda.
+
+## 👨‍💻 Penulis
+Raju Putra Dermawan Software Engineer | Backend Developer
+
+💼 LinkedIn: [linkedin.com/in/raju-putra-dermawan](https://www.linkedin.com/in/raju-putra-dermawan-244919220/)
