@@ -29,3 +29,24 @@ Project ini mengimplementasikan berbagai jenis relasi entitas:
 1. **Clone repository ini:**
    ```bash
    git clone [https://github.com/username-kamu/nama-repo-kamu.git](https://github.com/username-kamu/nama-repo-kamu.git)
+
+2. **Buka project di IDE (IntelliJ IDEA, Eclipse, atau VS Code).**
+
+3. **Run Script SQL**
+
+4. **Konfigurasi Database:**
+Buka file src/main/resources/application.properties dan sesuaikan kredensial database kamu. Contoh untuk MySQL:
+
+Properties
+spring.datasource.url=jdbc:mysql://localhost:3306/[nama_database]?useSSL=false&serverTimezone=UTC
+spring.datasource.username=[username_kamu]
+spring.datasource.password=[password_kamu]
+
+# Auto-create table (Opsional untuk development)
+spring.jpa.hibernate.ddl-auto=update
+
+5. **Jalankan Aplikasi:**
+Jalankan class utama CruddemoApplication.java.
+
+6. **Akses via Browser:**
+Buka http://localhost:8080 di browser Anda.
