@@ -1,54 +1,115 @@
-# EduManage - Spring Boot Advanced JPA Mapping
+# 🎓 EduManage - Advanced JPA & Hibernate Mapping
 
-EduManage adalah aplikasi web Sistem Manajemen Akademik sederhana yang dibangun untuk mendemonstrasikan implementasi **Advanced JPA & Hibernate Mapping** di dalam ekosistem Spring Boot. Aplikasi ini menyediakan operasi CRUD (Create, Read, Update, Delete) penuh dengan antarmuka pengguna yang bersih dan responsif.
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.6-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-25-orange.svg)](https://www.oracle.com/java/)
+[![Hibernate](https://img.shields.io/badge/Hibernate-ORM-blue.svg)](https://hibernate.org/)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+**EduManage** adalah platform demonstrasi sistem manajemen akademik yang dirancang untuk mengeksplorasi teknik pemetaan **Advanced JPA & Hibernate** yang kompleks. Proyek ini mengimplementasikan berbagai pola relasi database modern menggunakan **Java 25** dan **Spring Boot 4**.
+
+---
+
+## 📸 Project Showcase
+
+### 🏠 Dashboard Utama
+Tampilan antarmuka yang bersih dan intuitif untuk navigasi seluruh sistem.
+![Homepage](screenshots/homepage.png)
+
+<details>
+<summary><b>🔍 Lihat Detail Showcase Lainnya</b></summary>
+
+#### 👨‍🏫 Manajemen Instruktur
+Sistem manajemen instruktur yang mengimplementasikan relasi `@OneToOne` dengan profil detail.
+| Daftar Instruktur | Detail Instruktur |
+| :---: | :---: |
+| ![Daftar Instructor](screenshots/daftar%20instructor.png) | ![Detail Instructor](screenshots/detail%20instructor.png) |
+
+#### 📚 Manajemen Kursus & Siswa
+Implementasi relasi `@OneToMany` (Course to Review) dan `@ManyToMany` (Course to Student).
+| Detail Kursus | Detail Siswa |
+| :---: | :---: |
+| ![Detail Course](screenshots/detail%20course.png) | ![Detail Student](screenshots/detail%20student.png) |
+
+#### ➕ Formulir Input
+UI yang responsif untuk menambahkan data baru ke dalam sistem.
+![Add Instructor](screenshots/add%20instructor.png)
+</details>
+
+---
 
 ## 🚀 Fitur Utama
 
-- **Instruktur Management:** Mengelola data instruktur beserta detail profilnya (Relasi *One-to-One*).
-- **Course Management:** Mengelola mata kuliah, menyematkan instruktur, dan mengelola ulasan/review (*One-to-Many* & *Many-to-One*).
-- **Student Management:** Mengelola data siswa dan pendaftaran mereka ke berbagai mata kuliah (*Many-to-Many*).
-- **Clean UI/UX:** Antarmuka bergaya *enterprise dashboard* yang dibangun menggunakan Thymeleaf dan Bootstrap 5.
+- **Advanced Relationship Mapping:** Implementasi mendalam `@OneToOne`, `@OneToMany`, `@ManyToOne`, dan `@ManyToMany`.
+- **Bidirectional Navigation:** Semua entitas mendukung navigasi dua arah yang dikelola dengan benar untuk konsistensi data.
+- **Cascade Operations:** Penggunaan `CascadeType` yang tepat (Persist, Merge, Remove, dll.) untuk manajemen siklus hidup entitas.
+- **Fetch Strategy Optimization:** Demonstrasi penggunaan `Eager` vs `Lazy` loading untuk performa maksimal.
+- **Modern UI:** Dibangun dengan **Thymeleaf** dan **Bootstrap 5** dengan estetika *enterprise*.
+
+---
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Java 17+, Spring Boot 3, Spring Data JPA
-- **Database Mapping:** Hibernate
-- **Frontend:** HTML5, Thymeleaf, Bootstrap 5, Bootstrap Icons
-- **Database:** MySQL
+- **Core:** Java 25 (Latest JDK Features)
+- **Framework:** Spring Boot 4.0.6
+- **Persistence:** Spring Data JPA / Hibernate ORM
+- **Database:** MySQL 8.0+
+- **Template Engine:** Thymeleaf
+- **Styling:** Bootstrap 5 & Bootstrap Icons
 - **Build Tool:** Maven
 
-## 📋 Konsep Relasi Database (JPA Mapping)
+---
 
-Project ini mengimplementasikan berbagai jenis relasi entitas:
-1. `@OneToOne`: Antara `Instructor` dan `InstructorDetail`.
-2. `@OneToMany` / `@ManyToOne`: Antara `Instructor` dan `Course`, serta `Course` dan `Review`.
-3. `@ManyToMany`: Antara `Course` dan `Student` (Siswa dapat mengambil banyak kursus, dan kursus dapat diambil oleh banyak siswa).
+## 📊 Arsitektur Relasi JPA
 
-## ⚙️ Cara Menjalankan Project (Local Development)
+Proyek ini mendemonstrasikan 4 jenis relasi utama:
 
-1. **Clone repository ini:**
+1.  **`Instructor` ↔ `InstructorDetail` (`@OneToOne`)**
+    - Berbagi siklus hidup melalui `CascadeType.ALL`.
+2.  **`Instructor` → `Course` (`@OneToMany`)**
+    - Satu instruktur dapat memiliki banyak kursus. Menggunakan *Lazy Loading*.
+3.  **`Course` → `Review` (`@OneToMany`)**
+    - Kursus dapat memiliki banyak ulasan dari siswa (Unidirectional & Bidirectional examples).
+4.  **`Course` ↔ `Student` (`@ManyToMany`)**
+    - Relasi kompleks di mana siswa dapat mengambil banyak kursus dan sebaliknya.
+
+---
+
+## ⚙️ Instalasi & Cara Menjalankan
+
+### Persiapan
+- JDK 25 installed
+- MySQL Server running
+- Maven installed
+
+### Langkah-langkah
+1. **Clone Repository**
    ```bash
-   git clone [https://github.com/username-kamu/nama-repo-kamu.git](https://github.com/username-kamu/nama-repo-kamu.git)
-
-2. **Buka project di IDE (IntelliJ IDEA, Eclipse, atau VS Code).**
-
-3. **Run Script SQL**
-
-4. **Konfigurasi Database:**
-Buka file src/main/resources/application.properties dan sesuaikan kredensial database kamu. Contoh untuk MySQL:
-Set Properties
-   ```bash
-   spring.datasource.url=jdbc:mysql://localhost:3306/[nama_database]?useSSL=false&serverTimezone=UTC
-   spring.datasource.username=[username_kamu]
-   spring.datasource.password=[password_kamu]
+   git clone https://github.com/rajuputra/edumanage-advanced-jpa.git
    ```
-6. **Jalankan Aplikasi:**
-Jalankan class utama CruddemoApplication.java.
 
-7. **Akses via Browser:**
-Buka http://localhost:8080 di browser Anda.
+2. **Konfigurasi Database**
+   Edit `src/main/resources/application.properties`:
+   ```properties
+   spring.datasource.url=jdbc:mysql://localhost:3306/hb_student_tracker?useSSL=false&serverTimezone=UTC
+   spring.datasource.username=root
+   spring.datasource.password=yourpassword
+   ```
+
+3. **Jalankan Aplikasi**
+   ```bash
+   mvn spring-boot:run
+   ```
+   Akses di: `http://localhost:8080`
+
+---
 
 ## 👨‍💻 Penulis
-Raju Putra Dermawan Software Engineer | Backend Developer
 
-💼 LinkedIn: [linkedin.com/in/raju-putra-dermawan](https://www.linkedin.com/in/raju-putra-dermawan-244919220/)
+**Raju Putra Dermawan**
+*Software Engineer | Backend Developer*
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/raju-putra-dermawan-244919220/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat&logo=github)](https://github.com/rajuputra)
+
+---
+<p align="center">Dibuat dengan ❤️ untuk komunitas Java Indonesia</p>
